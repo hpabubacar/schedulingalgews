@@ -62,36 +62,37 @@ public class TRIER {
         
         count = count + arrival.get(0);
          
-        sort(arrival,burst);
+        sortb(arrival,burst);
             //System.out.println(arrival);
             //System.out.println(burst);
-                
+            System.out.print("Ghantt Chart: ");
             for (int i = 0; i < processes; i++){
                 rt.add(count); System.out.print(" ("+rt.get(i)+") ");
                 System.out.print(" | ");
+                sort(burst);
+               // System.out.print(arrival.get(i));
+               // System.out.println("burst.get(i)"+burst.get(i));
                 for (int j = 1; j <= burst.get(i); j++)
                 {
-                    System.out.print((i+1));
+                    System.out.print((i+1));   
                     count++;
                 }
-                
-                   System.out.print(" | ");
+                    System.out.print(" | ");
                     tf.add(count);
+                    
                 } System.out.println(" ("+count+") \n");
-
-                
         
         
         
-        /*
+        
         System.out.println("PROCESS \t\t Waiting Time \t\t Turn Around Time");
         for(int i = 0; i < processes; i++){
-            wt.add(rt.get(i)-arrival.get(i));
+            wt.add(rt.get(i)-arrival.indexOf(burst.get(i)));
             tat.add(tf.get(i)-arrival.get(i));
             System.out.println((i+1)+" \t\t\t " + (wt.get(i))+" \t\t\t "+(tat.get(i)));
         }
             System.out.println("  \t\t\t " + (tot(wt))+" \t\t\t "+(tot(tat)));
-        */}
+        }
         catch(Exception e){
             System.out.println("\nMay mali ka: " +e+" "+ e.getMessage());
         }
@@ -115,7 +116,7 @@ public class TRIER {
         return sum;
     }
     
-    public static void sort(ArrayList<Integer> arr,ArrayList<Integer> arr2) {
+    public static void sortb(ArrayList<Integer> arr,ArrayList<Integer> arr2) {
 		int temp;
 		for (int i = 0; i < arr.size() - 1; i++) {
  
@@ -127,6 +128,24 @@ public class TRIER {
                                         temp = arr2.get(j-1);
                                         arr2.set(j-1, arr2.get(j));
                                         arr2.set(j, temp);
+                                }
+			}
+                        
+                        //System.out.println("Iteration " + (i + 1) + ": " + arr);
+		}
+		//return arr;
+                
+	}
+    
+    public static void sort(ArrayList<Integer> arr) {
+		int temp;
+		for (int i = 0; i < arr.size() - 1; i++) {
+ 
+			for (int j = 2; j < arr.size() - i; j++) {
+				if (arr.get(j-1) > arr.get(j)) {
+					temp = arr.get(j-1);
+                                        arr.set(j-1, arr.get(j));
+                                        arr.set(j, temp);
                                 }
 			}
                         
